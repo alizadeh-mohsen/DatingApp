@@ -1,1 +1,5 @@
-﻿
+﻿Adding Entities folder
+Adding AppUser
+Adding EntityFrameworkCore.Sqlite
+Adding Data Folder
+Adding DataContext
