@@ -5,3 +5,5 @@ Adding Data Folder
 Adding DataContext
 Adding ngx-bootstrap
 Adding Font-awesome
+adding base controller
+importing postman services
