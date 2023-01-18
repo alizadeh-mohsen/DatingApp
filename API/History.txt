@@ -3,3 +3,5 @@ Adding AppUser
 Adding EntityFrameworkCore.Sqlite
 Adding Data Folder
 Adding DataContext
+Adding ngx-bootstrap
+Adding Font-awesome
