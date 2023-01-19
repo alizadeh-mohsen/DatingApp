@@ -8,3 +8,6 @@ Adding Font-awesome
 adding base controller
 importing postman services
 system.IdentityModel.Tokens.Jwt
+microsoft.aspnetcore.authentication.jwtbearer
+[Authorize]
+[AllowAnonymous]
