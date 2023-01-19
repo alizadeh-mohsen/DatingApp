@@ -11,3 +11,4 @@ system.IdentityModel.Tokens.Jwt
 microsoft.aspnetcore.authentication.jwtbearer
 [Authorize]
 [AllowAnonymous]
+#myForm="ngform" (ngSubmit)="login()" autocomlete="off"
