@@ -57,7 +57,7 @@ namespace API.Controllers
 
             for (int i = 0; i < password.Length; i++)
                 if (password[i] != user.PasswordHash[i])
-                    return Unauthorized("Invalid username");
+                    return Unauthorized("Invalid password");
 
             return new UserDto
             {
