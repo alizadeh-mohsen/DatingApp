@@ -7,3 +7,4 @@ Adding ngx-bootstrap
 Adding Font-awesome
 adding base controller
 importing postman services
+system.IdentityModel.Tokens.Jwt
