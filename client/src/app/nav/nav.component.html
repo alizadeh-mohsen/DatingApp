@@ -17,7 +17,8 @@
           <a class="nav-link" routerLink="/messages" routerLinkActive="active">Messages</a>
         </li>
       </ul>
-      <div class="btn-group" dropdown *ngIf="accountService.currentUser$  |async">
+     
+      <div class="btn-group" dropdown *ngIf="(accountService.currentUser$  | async) as user">
         <a id="button-basic" dropdownToggle class="dropdown-toggle text-light">
           Welcome {{user.username}}
         </a>

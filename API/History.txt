@@ -12,3 +12,5 @@ microsoft.aspnetcore.authentication.jwtbearer
 [Authorize]
 [AllowAnonymous]
 #myForm="ngform" (ngSubmit)="login()" autocomlete="off"
+Router
+Angular-toastr ngx-toastr
