@@ -4,7 +4,7 @@
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="collapse navbar-collapse" id="navbarCollapse" *ngIf="loggedIn">
+    <div class="collapse navbar-collapse" id="navbarCollapse" *ngIf="accountService.currentUser$ | async">
       <ul class="navbar-nav me-auto mb-2 mb-md-0">
         <li class="nav-item">
           <a class="nav-link" >Matches</a>
@@ -16,9 +16,9 @@
           <a class="nav-link">Messages</a>
         </li>
       </ul>
-      <div class="btn-group" dropdown *ngIf="loggedIn">
+      <div class="btn-group" dropdown *ngIf="accountService.currentUser$  |async">
         <a id="button-basic" dropdownToggle class="dropdown-toggle text-light">
-          Welcome {{user.username}} 
+          Welcome {{user.username}}
         </a>
         <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu"
             role="menu" >
@@ -26,15 +26,15 @@
           
           
           <li class="divider dropdown-divider"></li>
-          <li role="menuitem"><a class="dropdown-item" href="#">Logout</a>
+          <li role="menuitem"><a class="dropdown-item" (click)="logout()">Logout</a>
           </li>
         </ul>
       </div>
      
     </div>
-    <form #loginForm="ngForm" (submit)="login()" class="d-flex" *ngIf="!loggedIn" >
-      <input name="username" [(ngModel)]="user.username" class="form-control me-2" type="text" placeholder="Username" >
-      <input name="password" [(ngModel)]="user.password" class="form-control me-2" type="password" placeholder="Password" >
+    <form #loginForm="ngForm" (ngSubmit)="login()" class="d-flex" *ngIf="!(accountService.currentUser$ | async)" >
+      <input name="username" [(ngModel)]="model.username" class="form-control me-2" type="text" placeholder="Username" >
+      <input name="password" [(ngModel)]="model.password" class="form-control me-2" type="password" placeholder="Password" >
       <button class="btn btn-outline-light text-light" type="submit">Login</button>
     </form>
   </div>
