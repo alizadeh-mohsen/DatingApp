@@ -5,13 +5,14 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { MemberListComponent } from './members/member-list/member-list.component';
+import { AuthGuard } from './_guards/auth.guard';
 
 const routes: Routes = [
   { path: "", component: HomeComponent },
-  { path: "members", component: MemberListComponent },
-  { path: "members/:id", component: MemberDetailComponent },
-  { path: "lists", component: ListsComponent },
-  { path: "messages", component: MessagesComponent },
+  { path: "members", component: MemberListComponent, canActivate: [AuthGuard] },
+  { path: "members/:id", component: MemberDetailComponent, canActivate: [AuthGuard] },
+  { path: "lists", component: ListsComponent, canActivate: [AuthGuard] },
+  { path: "messages", component: MessagesComponent, canActivate: [AuthGuard] },
   { path: "**", component: MessagesComponent, pathMatch: 'full' },
 ];
 
