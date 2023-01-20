@@ -1,7 +1,6 @@
-import { HttpClient } from '@angular/common/http';
 import { AccountService } from './../_services/account.service';
 import { Component, OnInit } from '@angular/core';
-import { User } from '../_models/User';
+
 
 @Component({
   selector: 'app-nav',
@@ -11,10 +10,7 @@ import { User } from '../_models/User';
 export class NavComponent implements OnInit {
 
   model: any = {};
-  user: any = {
-    username: '',
-    token: ''
-  };
+  user: any;
 
   constructor(public accountService: AccountService) { }
 
@@ -24,10 +20,18 @@ export class NavComponent implements OnInit {
   login() {
 
     this.accountService.login(this.model).subscribe(
-     res => this.user = res
-    )
-  }
+      {
+        next: user => {
+          if (user)
+            this.user = user
+            else
+            this.user="-"
+        }
+      }
+    );
 
+
+  }
   logout() {
     this.accountService.logout();
   }

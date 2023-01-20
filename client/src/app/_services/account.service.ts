@@ -16,19 +16,35 @@ export class AccountService {
 
   login(model: any) {
     return this.http.post<User>(this.baseUrl + 'account/login', model).pipe(
-      map((response: User) => {
-        const user = response;
+      map((user => {
+
         if (user) {
           this.setCurrentUser(user);
+          return user;
         }
+        return null;
       })
-    );
+      ))
   }
+
+  register(model: any) {
+    return this.http.post<User>(this.baseUrl + 'account/resgiter', model).pipe(
+      map(user => {
+        if (user) {
+          this.setCurrentUser(user);
+          return user;
+        }
+        return null;
+      })
+    )
+  }
+
 
   setCurrentUser(user: User) {
     localStorage.setItem('user', JSON.stringify(user));
     this.currentUserSource.next(user);
   }
+
 
   logout() {
     localStorage.removeItem('user');
