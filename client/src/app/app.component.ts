@@ -14,12 +14,7 @@ export class AppComponent implements OnInit {
   constructor(private http: HttpClient) { }
 
   ngOnInit() {
-    // this.http.get('http://localhost:5145/api/users').subscribe(response => {
-    //   this.users = response;
-    // }, error => {
-    //   console.log(error);
-    // });
-
+   
     this.http.get('http://localhost:5001/api/users').subscribe({
       next: response => this.users = response,
       error: error => console.log(error),
