@@ -5,22 +5,24 @@
       aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="collapse navbar-collapse" id="navbarCollapse" *ngIf="accountService.currentUser$ | async">
+    <div class="collapse navbar-collapse" id="navbarCollapse">
       <ul class="navbar-nav me-auto mb-2 mb-md-0">
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/members" routerLinkActive="active">Matches</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/lists" routerLinkActive="active">Lists</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/messages" routerLinkActive="active">Messages</a>
-        </li>
+        <ng-container *ngIf="accountService.currentUser$ | async">
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/members" routerLinkActive="active">Matches</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/lists" routerLinkActive="active">Lists</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/messages" routerLinkActive="active">Messages</a>
+          </li>
+        </ng-container>
       </ul>
-     
+
       <div class="btn-group" dropdown *ngIf="(accountService.currentUser$  | async) as user">
         <a id="button-basic" dropdownToggle class="dropdown-toggle text-light">
-          Welcome {{user.username}}
+          Welcome {{user.username | titlecase}}
         </a>
         <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu" role="menu">
           <li role="menuitem"><a class="dropdown-item">Edit Profile</a></li>
@@ -37,7 +39,7 @@
       <input name="username" [(ngModel)]="model.username" class="form-control me-2" type="text" placeholder="Username">
       <input name="password" [(ngModel)]="model.password" class="form-control me-2" type="password"
         placeholder="Password">
-      <button class="btn btn-outline-light text-light" type="submit">Login</button>
+      <button class="btn btn-success text-light" type="submit">Login</button>
     </form>
   </div>
 </nav>
