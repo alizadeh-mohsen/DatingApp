@@ -14,3 +14,6 @@ microsoft.aspnetcore.authentication.jwtbearer
 #myForm="ngform" (ngSubmit)="login()" autocomlete="off"
 Router
 Angular-toastr ngx-toastr
+add guard 
+adding apiException
+adding exceptionMiddleware
