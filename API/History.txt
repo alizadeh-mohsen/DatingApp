@@ -17,3 +17,4 @@ Angular-toastr ngx-toastr
 add guard 
 adding apiException
 adding exceptionMiddleware
+seed data Json-generator.com or other jason generator websites

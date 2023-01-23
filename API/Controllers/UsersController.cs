@@ -7,7 +7,7 @@ using System.Linq;
 
 namespace API.Controllers
 {
-  
+    [Authorize]
     public class UsersController : BaseApiController
     {
         private readonly DataContext dataContext;
@@ -18,14 +18,13 @@ namespace API.Controllers
         }
 
         [HttpGet]
-        [AllowAnonymous]
         public async Task<IEnumerable<AppUser>> GetUsers()
         {
             return await dataContext.Users.ToListAsync();
         }
 
         [HttpGet("{id}")]
-        [Authorize]
+        
         public async Task<AppUser> GetUser(int id)
         {
             return await dataContext.Users.FindAsync(id);
