@@ -21,9 +21,7 @@ export class RegisterComponent implements OnInit {
 
   register() {
     this.accountService.register(this.model).subscribe({
-      next: _ => this.router.navigateByUrl('/'),
-      error: error => this.toastr.error(error.error
-      )
+      next: _ => this.router.navigateByUrl('/')
     });
   }
   cancel() {
