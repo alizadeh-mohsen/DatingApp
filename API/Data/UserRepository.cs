@@ -18,17 +18,14 @@ namespace API.Data
             dataContext = context;
             this.mapper = mapper;
         }
-        public async Task<MemberDto> GetUserByUsernameAsync(string username)
+        public async Task<AppUser> GetUserByUsernameAsync(string username)
         {
-            var user = await dataContext.Users.Include(u => u.Photos).SingleOrDefaultAsync(c => c.UserName.ToLower() == username);
-            return mapper.Map<MemberDto>(user);
+           return await dataContext.Users.SingleOrDefaultAsync(c => c.UserName.ToLower() == username);
         }
 
-        public async Task<IEnumerable<MemberDto>> GetAllUsersAsync()
+        public async Task<IEnumerable<AppUser>> GetAllUsersAsync()
         {
-            var users = await dataContext.Users.Include(u => u.Photos).ToListAsync();
-            var members = mapper.Map<IEnumerable<MemberDto>>(users);
-            return members;
+            return await dataContext.Users.ToListAsync();
         }
 
         public async Task<bool> SaveAllAsync()
