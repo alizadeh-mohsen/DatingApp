@@ -18,7 +18,6 @@ import { ServerErrorComponent } from './errors/server-error/server-error.compone
 import { MemberCardComponent } from './members/member-card/member-card.component';
 import { TokenInterceptor } from './_interceptors/token.interceptor';
 
-
 @NgModule({
   declarations: [
     AppComponent,

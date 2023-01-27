@@ -20,3 +20,4 @@ adding exceptionMiddleware
 seed data Json-generator.com or other jason generator websites
 add Automapper
 using Json To Ts
+Adding ngxGallery
