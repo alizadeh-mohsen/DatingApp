@@ -16,6 +16,7 @@ import { ListsComponent } from './lists/lists.component';
 import { NotFoundComponent } from './errors/not-found/not-found.component';
 import { ServerErrorComponent } from './errors/server-error/server-error.component';
 import { MemberCardComponent } from './members/member-card/member-card.component';
+import { TokenInterceptor } from './_interceptors/token.interceptor';
 
 
 @NgModule({
@@ -41,7 +42,8 @@ import { MemberCardComponent } from './members/member-card/member-card.component
 
   ],
   providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
   ],
   bootstrap: [AppComponent]
 })

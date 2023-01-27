@@ -14,12 +14,13 @@ export class MemberListComponent implements OnInit {
   constructor(private memberService: MemberService) { }
 
   ngOnInit(): void {
-   this.loadMembers();
+    this.loadMembers();
   }
 
-  loadMembers()
-  { this.memberService.getMembers().subscribe({
-    next: members => this.members = members
-  })}
+  loadMembers() {
+    this.memberService.getMembers().subscribe({
+      next: members => this.members = members
+    })
+  }
 
 }
