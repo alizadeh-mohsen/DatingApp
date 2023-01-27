@@ -2,6 +2,7 @@
 using API.Entities;
 using API.Interfaces;
 using AutoMapper;
+using AutoMapper.QueryableExtensions;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -40,6 +41,19 @@ namespace API.Data
             dataContext.Entry(user).State = EntityState.Modified;
         }
 
+        public async Task<MemberDto> GetMemberAsync(string username)
+        {
+            return await dataContext.Users
+                .Where(u => u.UserName == username)
+                .ProjectTo<MemberDto>(mapper.ConfigurationProvider)
+                .SingleOrDefaultAsync();
 
+        }
+
+        public async Task<IEnumerable<MemberDto>> GetAllMembersAsync()
+        {
+            return await dataContext.Users
+                .ProjectTo<MemberDto>(mapper.ConfigurationProvider).ToListAsync();
+        }
     }
 }

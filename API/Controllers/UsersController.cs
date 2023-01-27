@@ -22,14 +22,14 @@ namespace API.Controllers
         [HttpGet]
         public async Task<IEnumerable<MemberDto>> GetUsers()
         {
-            return await userReopsitory.GetAllUsersAsync();
+            return await userReopsitory.GetAllMembersAsync();
         }
 
         [HttpGet("{username}")]
         
         public async Task<MemberDto> GetUser(string username)
         {
-            return await userReopsitory.GetUserByUsernameAsync(username);
+            return await userReopsitory.GetMemberAsync(username);
         }
     }
 }
