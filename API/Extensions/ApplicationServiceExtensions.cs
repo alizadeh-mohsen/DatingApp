@@ -1,4 +1,6 @@
 ﻿using API.Data;
+using API.Interfaces;
+using API.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -14,6 +16,11 @@ namespace API.Extensions
             {
                 options.UseSqlite(configuration.GetConnectionString("defaultConnection"));
             });
+
+            services.AddCors();
+            services.AddScoped<ITokenService, TokenService>();
+            services.AddScoped<IUserReopsitory, UserRepository>();
+
             return services;
 
         }

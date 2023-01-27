@@ -12,7 +12,7 @@ namespace API.Migrations
 {
     [DbContext(typeof(DataContext))]
     [Migration("20230123132040_seed")]
-    partial class seed
+    partial class Seed
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
