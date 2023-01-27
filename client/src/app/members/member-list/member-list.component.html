@@ -1,8 +1,5 @@
-<div class="container">
-    <ul>
-        <li *ngFor="let member of members">
-            knownAs: {{member.knownAs}}
-        
-        </li>
-    </ul>
+<div class="row">
+    <div class="col-2" *ngFor="let member of members">
+        <app-member-card [member]="member"></app-member-card>
+    </div>
 </div>
