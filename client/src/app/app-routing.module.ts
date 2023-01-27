@@ -8,6 +8,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { MemberListComponent } from './members/member-list/member-list.component';
 import { AuthGuard } from './_guards/auth.guard';
+import { MemberEditComponent } from './members/member-edit/member-edit.component';
 
 const routes: Routes = [
   { path: "", component: HomeComponent },
@@ -18,6 +19,7 @@ const routes: Routes = [
     children: [
     { path: "members", component: MemberListComponent, canActivate: [AuthGuard] },
     { path: "members/:username", component: MemberDetailComponent, canActivate: [AuthGuard] },
+    { path: "member/edit", component: MemberEditComponent, canActivate: [AuthGuard] },
     { path: "lists", component: ListsComponent, canActivate: [AuthGuard] },
     { path: "messages", component: MessagesComponent, canActivate: [AuthGuard] },]
   },
