@@ -1,3 +1,29 @@
-<div *ngIf="member">
-    {{member.knownAs}}
+<div class="row" *ngIf="member">
+    <div class="col-4">
+        <div class="card">
+            <img src="{{member.photoUrl || './assets/user.png'}}" alt="{{member.knownAs}"
+                class="card-img-top img-thumbnail">
+            <div class="card-body">
+
+                <div>
+                    <strong>Location:</strong>
+                    <p> {{member.country}}, {{member.city}}</p>
+                    <strong>Age:</strong>
+                    <p> {{member.age}}</p>
+                    <strong>Last Active:</strong>
+                    <p> {{member.lastActive}}</p>
+                    <strong>Member since:</strong>
+                    <p> {{member.created}}</p>
+
+                </div>
+                <div class="card-footer">
+                    <div class="btn-group d-flex">
+                        <button class="btn btn-primary">Like</button>
+                        <button class="btn btn-success">Messages</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
 </div>
