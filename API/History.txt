@@ -22,3 +22,4 @@ add Automapper
 using Json To Ts
 Adding ngxGallery
 Adding ngxspinner
+aading cloudinary for images
