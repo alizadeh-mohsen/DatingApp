@@ -21,7 +21,8 @@
       </ul>
 
       <div class="btn-group" dropdown *ngIf="(accountService.currentUser$  | async) as user">
-        <a id="button-basic" dropdownToggle class="dropdown-toggle text-light">
+        <img src="{{user.photoUrl || './assets/user.png'}}" alt="no image">
+        <a id="button-basic" dropdownToggle class="dropdown-toggle text-light text-decoration-none ms-2">
           Welcome {{user.username | titlecase}}
         </a>
         <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu" role="menu">

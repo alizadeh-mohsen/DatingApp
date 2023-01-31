@@ -37,18 +37,14 @@ namespace API.Controllers
 
             dataContext.Users.Add(user);
             await dataContext.SaveChangesAsync();
-            return new UserDto
-            {
-                Username = user.UserName,
-                Token = tokenService.CreateToken(user)
-            };
+            return NewUserDto(user);
         }
 
         [HttpPost("login")]
         public async Task<ActionResult<UserDto>> Login(LoginDto loginDto)
         {
 
-            var user = await dataContext.Users.FirstOrDefaultAsync(u => u.UserName == loginDto.Username);
+            var user = await dataContext.Users.Include(u=>u.Photos).FirstOrDefaultAsync(u => u.UserName == loginDto.Username);
 
             if (user == null) return Unauthorized("Invalid username");
 
@@ -58,11 +54,16 @@ namespace API.Controllers
             for (int i = 0; i < password.Length; i++)
                 if (password[i] != user.PasswordHash[i])
                     return Unauthorized("Invalid password");
+            return NewUserDto(user);
+        }
 
+        private ActionResult<UserDto> NewUserDto(AppUser? user)
+        {
             return new UserDto
             {
                 Username = user.UserName,
-                Token = tokenService.CreateToken(user)
+                Token = tokenService.CreateToken(user),
+                PhotoUrl = user.Photos.FirstOrDefault(x => x.IsMain)?.Url
             };
         }
 

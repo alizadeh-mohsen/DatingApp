@@ -79,6 +79,25 @@ namespace API.Controllers
             }
             return BadRequest("Photo not uploaded");
         }
+        [HttpDelete("delete-photo/{photoId}")]
+        public async Task<ActionResult> DeletePhoto(int photoId)
+        {
+            var user = await userReopsitory.GetUserByUsernameAsync(User.GetUsername());
+
+            var photo = user.Photos.FirstOrDefault(x => x.Id == photoId);
+            if (photo == null) return NotFound();
+            if (photo.IsMain) return BadRequest("You cannot delete main photo");
+
+            var result = await photoService.DeletePhotoAsync(photo.PublicId);
+            if (result.Error != null) return BadRequest(result.Error.Message);
+
+            user.Photos.Remove(photo);
+
+            if (await userReopsitory.SaveAllAsync())
+                return Ok();
+
+            return BadRequest("Photo not uploaded");
+        }
 
         [HttpPut("set-main-photo/{photoId}")]
         public async Task<IActionResult> SetMainPhoto(int photoId)
@@ -94,9 +113,9 @@ namespace API.Controllers
 
             if (mainPhoto != null)
             {
-                if (mainPhoto.Id == photoId) 
+                if (mainPhoto.Id == photoId)
                     return NoContent();
-                
+
                 mainPhoto.IsMain = false;
             }
 

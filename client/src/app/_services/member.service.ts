@@ -1,3 +1,4 @@
+import { Photo } from './../_models/photo';
 import { environment } from './../../environments/environment';
 
 import { Member } from './../_models/member';
@@ -44,6 +45,15 @@ export class MemberService {
         }
       })
     );
+  }
+
+  setMainPhoto(photoId: number) {
+    return this.http.put(this.baseUrl + 'users/set-main-photo/'+ photoId,{});
+  }
+
+  deletePhoto(PhotoId:number)
+  {
+    return this.http.delete(this.baseUrl+'users/delete-photo/'+PhotoId);
   }
 
 }
