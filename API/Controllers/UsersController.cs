@@ -60,18 +60,23 @@ namespace API.Controllers
             if (user == null) return NotFound();
 
             var result = await photoService.AddPhotoAsync(file);
-            if(result.Error!=null) return BadRequest(result.Error.Message);
+            if (result.Error != null) return BadRequest(result.Error.Message);
             var photo = new Photo
             {
                 Url = result.SecureUrl.AbsoluteUri,
                 PublicId = result.PublicId,
             };
 
-            if(!user.Photos.Any())
-                photo.IsMain= true;
+            if (!user.Photos.Any())
+                photo.IsMain = true;
             user.Photos.Add(photo);
 
-            if (await userReopsitory.SaveAllAsync()) return mapper.Map<PhotoDto>(photo);
+            if (await userReopsitory.SaveAllAsync())
+            {
+                return CreatedAtAction(nameof(GetUser),
+                    new { username = user.UserName },
+                    mapper.Map<PhotoDto>(photo));
+            }
             return BadRequest("Photo not uploaded");
         }
     }
