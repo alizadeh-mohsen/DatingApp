@@ -79,7 +79,7 @@ namespace API.Controllers
             }
             return BadRequest("Photo not uploaded");
         }
-        [HttpDelete("delete-photo/{photoId}")]
+        [HttpDelete("delete-photo/{photoIdregs}")]
         public async Task<ActionResult> DeletePhoto(int photoId)
         {
             var user = await userReopsitory.GetUserByUsernameAsync(User.GetUsername());

@@ -1,4 +1,3 @@
-import { Photo } from './../_models/photo';
 import { environment } from './../../environments/environment';
 
 import { Member } from './../_models/member';

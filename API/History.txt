@@ -24,3 +24,6 @@ Adding ngxGallery
 Adding ngxspinner
 aading cloudinary for images
 add ng2-file-upload
+[class.is-Invalid]=""
+class="invalid-feedback"
+ngx datepicker
