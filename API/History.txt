@@ -27,3 +27,4 @@ add ng2-file-upload
 [class.is-Invalid]=""
 class="invalid-feedback"
 ngx datepicker
+adding pagination

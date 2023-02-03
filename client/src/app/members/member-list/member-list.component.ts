@@ -1,6 +1,8 @@
+import { Pagination } from './../../_models/paginations';
 import { MemberService } from './../../_services/member.service';
 import { Member } from './../../_models/member';
 import { Component, OnInit } from '@angular/core';
+import { PageChangedEvent } from 'ngx-bootstrap/pagination';
 
 @Component({
   selector: 'app-member-list',
@@ -9,7 +11,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MemberListComponent implements OnInit {
 
+  pageNumber = 1;
+  pageSize = 5;
   members: Member[] = [];
+  pagination: Pagination | undefined;
 
   constructor(private memberService: MemberService) { }
 
@@ -18,9 +23,19 @@ export class MemberListComponent implements OnInit {
   }
 
   loadMembers() {
-    this.memberService.getMembers().subscribe({
-      next: members => this.members = members
+    this.memberService.getMembers(this.pageNumber, this.pageSize).subscribe({
+      next: response => {
+        if (response.result && response.pagination) {
+          this.members = response.result;
+          this.pagination = response.pagination;
+        }
+      }
     })
+  }
+
+  pageChanged(event: PageChangedEvent) {
+    this.pageNumber = event.page;
+    this.loadMembers();
   }
 
 }
