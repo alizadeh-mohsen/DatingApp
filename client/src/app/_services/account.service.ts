@@ -20,6 +20,7 @@ export class AccountService {
       map((user => {
 
         if (user) {
+          
           this.setCurrentUser(user);
           return user;
         }

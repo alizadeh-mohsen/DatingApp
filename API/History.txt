@@ -28,3 +28,5 @@ add ng2-file-upload
 class="invalid-feedback"
 ngx datepicker
 adding pagination
+add ServiceFilter Middleware
+add ngx-timeago
