@@ -1,6 +1,7 @@
 ﻿using API.Data;
 using API.DTOs;
 using API.Extensions;
+using API.Helpers;
 using API.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using System.Runtime.CompilerServices;
@@ -27,7 +28,7 @@ namespace API.Controllers
 
             if (targetUser == null) return BadRequest("User not found");
 
-            if (targetUser.UserName == username) return BadRequest("You cannot like yoursefl");
+            if (sourceUser.UserName == username) return BadRequest("You cannot like yoursefl");
 
 
             if (await likesRepository.GetUserLike(sourceUserId, targetUser.Id) != null)
@@ -46,9 +47,11 @@ namespace API.Controllers
         }
 
         [HttpGet()]
-        public async Task<ActionResult<IEnumerable<LikeDto>>> GetLikes(string predciate)
+        public async Task<ActionResult<PagedList<LikeDto>>> GetLikes([FromQuery] LikesParams likesParams)
         {
-            var users = await likesRepository.GetUserLikes(predciate, User.GetUserId());
+            likesParams.UserId = User.GetUserId();
+            var users = await likesRepository.GetUserLikes(likesParams);
+            Response.AddPaginationHeader(new PaginationHeader(users.CurrentPage, users.PageSize, users.TotalCount, users.TotalPages));
 
             return Ok(users);
         }
