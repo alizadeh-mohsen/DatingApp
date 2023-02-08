@@ -1,1 +1,16 @@
-<p>server-error works!</p>
+<h1>The error details</h1>
+<div class="container mt-3" *ngIf="erroDetail">
+    <div> <strong> Status Code:</strong>
+
+        {{erroDetail.error.statusCode}}
+    </div>
+    <div>
+        <strong> Message:</strong>
+
+        {{erroDetail.error.message}}
+    </div>
+    <div class="mt-2">
+        <strong> details:</strong>
+        {{erroDetail.error.details}}
+    </div>
+</div>
