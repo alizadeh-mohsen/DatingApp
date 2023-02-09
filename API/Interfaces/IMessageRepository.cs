@@ -5,9 +5,9 @@ namespace API.Interfaces
 {
     public interface IMessageRepository
     {
-        void SendMessage(Message message);
+        void AddMessage(Message message);
 
-        void DeleteMessage(int messageId);
+        void DeleteMessage(Message message);
 
         Task<Message> GetMessage(int id); 
         Task<PagedList<Message>> GetMessagesThread(int senderId,int receiverId);

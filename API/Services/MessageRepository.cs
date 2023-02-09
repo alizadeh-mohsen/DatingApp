@@ -13,7 +13,7 @@ namespace API.Services
         {
             this.dataContext = dataContext;
         }
-        public async void DeleteMessage(int messageId)
+        public async void DeleteMessage(Message message)
         {
             dataContext.Messages.Remove(message);
         }
@@ -21,7 +21,7 @@ namespace API.Services
         {
             return await dataContext.SaveChangesAsync() > 0;
         }
-        public void SendMessage(Message message)
+        public void AddMessage(Message message)
         {
             dataContext.Messages.Add(message);
         }
@@ -32,7 +32,7 @@ namespace API.Services
 
         public async Task<PagedList<Message>> GetMessagesThread(int senderId, int receiverId)
         {
-            var query = dataContext.Messages.Where(m => m.SenderId == senderId && m.RecipientDeleted == receiverId).AsQueryable();
+            throw new NotImplementedException();
         }
 
         public Task<PagedList<Message>> GetSentMessagesOfUser()
