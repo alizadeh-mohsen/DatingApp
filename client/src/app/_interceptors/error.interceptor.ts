@@ -21,11 +21,15 @@ export class ErrorInterceptor implements HttpInterceptor {
         if (error) {
           switch (error.status) {
             case 400:
-              if (error.error.errors) {
+              console.log(error);
+              console.log(error.error);
+              
+              if (error.error) {
+                
                 const modelStateErrors = [];
-                for (const key in error.error.errors) {
-                  if (error.error.errors[key]) {
-                    modelStateErrors.push(error.error.errors[key])
+                for (const key in error.error) {
+                  if (error.error[key]) {
+                    modelStateErrors.push(error.error[key])
                   }
                 }
                 throw modelStateErrors.flat();
@@ -45,7 +49,7 @@ export class ErrorInterceptor implements HttpInterceptor {
               this.router.navigateByUrl('/server-error', navigationExtras);
               break;
             default:
-              this.toastr.error('Something unexpected went wrong');
+              this.toastr.error('Serve is down');
               console.log(error);
               break;
           }

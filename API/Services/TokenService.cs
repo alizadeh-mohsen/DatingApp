@@ -1,26 +1,34 @@
 ﻿using API.Entities;
 using API.Interfaces;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
+using System.Linq;
 
 namespace API.Services
 {
     public class TokenService : ITokenService
     {
         private readonly SymmetricSecurityKey key;
-        public TokenService(IConfiguration config)
+        private readonly UserManager<AppUser> userManager;
+
+        public TokenService(IConfiguration config, UserManager<AppUser> userManager)
         {
             key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(config["TokenKey"]));
+            this.userManager = userManager;
         }
-        public string CreateToken(AppUser appUser)
+        public async Task<string> CreateToken(AppUser appUser)
         {
             var claims = new List<Claim>
             {
                 new Claim(JwtRegisteredClaimNames.NameId,appUser.Id.ToString()),
-                new Claim(JwtRegisteredClaimNames.UniqueName,appUser.UserName)
+                new Claim(JwtRegisteredClaimNames.UniqueName,appUser.UserName),
             };
+            var roles = await userManager.GetRolesAsync(appUser);
+            claims.AddRange(roles.Select(roles => new Claim(ClaimTypes.Role, roles)));
+
             var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha512Signature);
 
             var tokenDescriptor = new SecurityTokenDescriptor

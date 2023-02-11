@@ -1,3 +1,5 @@
+import { AdminGuard } from './_guards/admin.guard';
+import { AdminPanelComponent } from './admin/admin-panel/admin-panel.component';
 import { MemberDetailedResolver } from './_resolver/member-detailed.resolver';
 import { Member } from 'src/app/_models/member';
 import { PreventChangeLossGuard } from './_guards/prevent-change-loss.guard';
@@ -20,11 +22,12 @@ const routes: Routes = [
     runGuardsAndResolvers: 'always',
     canActivate: [AuthGuard],
     children: [
-      { path: "members", component: MemberListComponent, canActivate: [AuthGuard] },
-      { path: "members/:username", component: MemberDetailComponent, canActivate: [AuthGuard], resolve: { member: MemberDetailedResolver } },
-      { path: "member/edit", component: MemberEditComponent, canActivate: [AuthGuard], canDeactivate: [PreventChangeLossGuard] },
-      { path: "lists", component: ListsComponent, canActivate: [AuthGuard] },
-      { path: "messages", component: MessagesComponent, canActivate: [AuthGuard] },]
+      { path: "members", component: MemberListComponent },
+      { path: "members/:username", component: MemberDetailComponent, resolve: { member: MemberDetailedResolver } },
+      { path: "member/edit", component: MemberEditComponent, canDeactivate: [PreventChangeLossGuard] },
+      { path: "lists", component: ListsComponent },
+      { path: "messages", component: MessagesComponent },
+      { path: "admin", component: AdminPanelComponent, canActivate: [AdminGuard] }]
   },
   { path: "not-found", component: NotFoundComponent },
   { path: "server-error", component: ServerErrorComponent },

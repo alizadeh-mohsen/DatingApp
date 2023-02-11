@@ -31,3 +31,5 @@ adding pagination
 add ServiceFilter Middleware
 add ngx-timeago
 using RouteResolver
+using directievs
+using ngx modals
