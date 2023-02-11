@@ -30,3 +30,4 @@ ngx datepicker
 adding pagination
 add ServiceFilter Middleware
 add ngx-timeago
+using RouteResolver

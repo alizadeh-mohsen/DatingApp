@@ -1,3 +1,5 @@
+import { MemberDetailedResolver } from './_resolver/member-detailed.resolver';
+import { Member } from 'src/app/_models/member';
 import { PreventChangeLossGuard } from './_guards/prevent-change-loss.guard';
 import { ServerErrorComponent } from './errors/server-error/server-error.component';
 import { NotFoundComponent } from './errors/not-found/not-found.component';
@@ -19,7 +21,7 @@ const routes: Routes = [
     canActivate: [AuthGuard],
     children: [
       { path: "members", component: MemberListComponent, canActivate: [AuthGuard] },
-      { path: "members/:username", component: MemberDetailComponent, canActivate: [AuthGuard] },
+      { path: "members/:username", component: MemberDetailComponent, canActivate: [AuthGuard], resolve: { member: MemberDetailedResolver } },
       { path: "member/edit", component: MemberEditComponent, canActivate: [AuthGuard], canDeactivate: [PreventChangeLossGuard] },
       { path: "lists", component: ListsComponent, canActivate: [AuthGuard] },
       { path: "messages", component: MessagesComponent, canActivate: [AuthGuard] },]
