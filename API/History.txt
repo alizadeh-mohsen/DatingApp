@@ -33,3 +33,4 @@ add ngx-timeago
 using RouteResolver
 using directievs
 using ngx modals
+adding signalR
